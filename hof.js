@@ -1,3 +1,6 @@
+/**
+ * hof.js by github.com/zg
+ */
 average = function(arr) {
     return reduce(arr,function(a,b) {
         return a + b;
