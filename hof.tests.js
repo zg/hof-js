@@ -32,6 +32,7 @@ var tests = [
     ["groupBy",groupBy([3.14,3.65,10,10.4,15],function(x){return Math.round(x)}),objToArray({3:[3.14],4:[3.65],10:[10,10.4],15:[15]})],
     ["map",map(["John","Apple","Seed"],function(x){return x.length}),[4,5,4]],
     ["none",none([0,2,3,4,5],1),true],
+    ["product",product(1,5,function(x){return x*x}),14400],
     ["range",range(5,3,-3),[5]],
     ["reduce",reduce([1,2,3,4],function(a,b){return a+b}),10],
     ["reduceRight",reduceRight(['1',2,'3',4,5],function(a,b){return a+b}),"9321"],

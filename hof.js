@@ -149,6 +149,27 @@ none = function(arr, item) {
 }
 
 /**
+ * product - multiply all values of function from start to end
+ * @param func the function
+ * @param start the starting value
+ * @param end the ending value
+ * @return the product of all values between start and end
+ */
+product = function(start, end, func) {
+    var func = func || function(x) {
+        return x;
+    };
+    loop = function(start, acc) {
+        if(start > end) {
+            return acc;
+        } else {
+            return loop(start + 1, func(start) * acc);
+        }
+    }
+    return loop(start, 1);
+}
+
+/**
  * range - build a range of numbers between start and end, exclusive
  * @param start lower bound
  * @param end upper bound
