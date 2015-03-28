@@ -29,7 +29,6 @@ var tests = [
     ["filter",filter([1,2,3,4],function(x){return x % 2 == 0}),[2,4]],
     ["fold",fold(['1',2,'3',4,5],function(a,b){return a+b},0),"012345"],
     ["foldRight",foldRight(['1',2,'3',4,5],function(a,b){return a+b},0),"9321"],
-    ["forEach",forEach([1,2,3,4],function(x){return x*x*x}),[1,8,27,64]],
     ["groupBy",groupBy([3.14,3.65,10,10.4,15],function(x){return Math.round(x)}),objToArray({3:[3.14],4:[3.65],10:[10,10.4],15:[15]})],
     ["map",map(["John","Apple","Seed"],function(x){return x.length}),[4,5,4]],
     ["none",none([0,2,3,4,5],1),true],

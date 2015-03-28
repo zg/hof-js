@@ -91,16 +91,14 @@ foldRight = function(arr, func, init) {
 }
 
 /**
- * foreach - applies func to each element of arr
+ * forEach - applies a function to each element of arr
  * @param arr the array
  * @param func the function to run
  */
 forEach = function(arr, func) {
-    var ret = [];
     for(index in arr) {
-        ret.push(func(arr[index]));
+        func(arr[index]);
     }
-    return ret;
 }
 
 /**
