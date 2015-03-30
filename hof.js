@@ -230,7 +230,7 @@ reverse = function(arr) {
  */
 some = function(arr, item) {
   for(index in arr) {
-    if(arr[index] == item) {
+    if(arr[index] === item) {
       return true;
     }
   }
