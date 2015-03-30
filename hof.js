@@ -63,7 +63,7 @@ average = function(arr) {
  */
 every = function(arr, item) {
   for (index in arr) {
-    if (!_equals(arr[index],item)) {
+    if (!_equals(arr[index], item)) {
       return false;
     }
   }
@@ -258,7 +258,7 @@ reverse = function(arr) {
  */
 some = function(arr, item) {
   for (index in arr) {
-    if (_equals(arr[index],item)) {
+    if (_equals(arr[index], item)) {
       return true;
     }
   }
