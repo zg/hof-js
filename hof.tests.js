@@ -1,20 +1,4 @@
-arraysEqual = function(a, b) {
-    if (a === b)
-        return true;
-    if (a == null || b == null)
-        return false;
-    if (a.length != b.length)
-        return false;
-    for(index in a) {
-        if(Object.prototype.toString.call(a[index]) == "[object Array]") {
-            if(!arraysEqual(a[index],b[index]))
-                return false;
-        }
-        else if (a[index] !== b[index])
-            return false;
-    }
-    return true;
-}
+var _equals = _equals || _e;
 
 objToArray = function(obj) {
     var ret = [];
@@ -54,7 +38,7 @@ for(test in tests) {
     var type_mismatch = result_type !== expect_type;
     switch(Object.prototype.toString.call(expect)) {
         case "[object Array]":
-            if(arraysEqual(result,expect)) {
+            if(_equals(result,expect)) {
                 passed = true;
                 pass_count++;
             }

@@ -18,6 +18,34 @@ _assert = function(condition, message) {
 }
 
 /**
+ * _equals - a helper that checks if two objects are equal to each other
+ * @param a the first object
+ * @param b the second object
+ * @return true if the objects are equal, else false
+ */
+_equals = function(a, b) {
+  if (a === b) {
+    return true;
+  }
+  if (a == null || b == null) {
+    return false;
+  }
+  if (a.length != b.length) {
+    return false;
+  }
+  for (index in a) {
+    if (Object.prototype.toString.call(a[index]) == "[object Array]") {
+      if (!_equals(a[index], b[index])) {
+        return false;
+      }
+    } else if (a[index] !== b[index]) {
+      return false;
+    }
+  }
+  return true;
+}
+
+/**
  * average - compute the average of a given array of integers
  * @param arr the array containing integers
  * @return average of the values
@@ -34,8 +62,8 @@ average = function(arr) {
  * @return true if all items in arr are item, else false
  */
 every = function(arr, item) {
-  for(index in arr) {
-    if(arr[index] !== item) {
+  for (index in arr) {
+    if (!_equals(arr[index],item)) {
       return false;
     }
   }
@@ -50,8 +78,8 @@ every = function(arr, item) {
  */
 filter = function(arr, pred) {
   var ret = [];
-  for(index in arr) {
-    if(pred(arr[index])) {
+  for (index in arr) {
+    if (pred(arr[index])) {
       ret.push(arr[index]);
     }
   }
@@ -68,7 +96,7 @@ filter = function(arr, pred) {
  */
 fold = function(arr, func, init) {
   var ret = init;
-  for(index in arr) {
+  for (index in arr) {
     ret = func(ret, arr[index]);
   }
   return ret;
@@ -84,7 +112,7 @@ fold = function(arr, func, init) {
  */
 foldRight = function(arr, func, init) {
   var ret = init;
-  for(index in arr) {
+  for (index in arr) {
     ret = func(ret, arr[arr.length - index - 1]);
   }
   return ret;
@@ -96,7 +124,7 @@ foldRight = function(arr, func, init) {
  * @param func the function to run
  */
 forEach = function(arr, func) {
-  for(index in arr) {
+  for (index in arr) {
     func(arr[index]);
   }
 }
@@ -109,9 +137,9 @@ forEach = function(arr, func) {
  */
 groupBy = function(arr, grouping) {
   var ret = [];
-  for(index in arr) {
+  for (index in arr) {
   group = grouping(arr[index]);
-  if(!ret[group]) {
+  if (!ret[group]) {
     ret[group] = [];
   }
   ret[group].push(arr[index]);
@@ -127,7 +155,7 @@ groupBy = function(arr, grouping) {
  */
 map = function(arr, func) {
   var ret = [];
-  for(index in arr) {
+  for (index in arr) {
     ret.push(func(arr[index]));
   }
   return ret;
@@ -140,8 +168,8 @@ map = function(arr, func) {
  * @return true if none of the elements match, else false
  */
 none = function(arr, item) {
-  for(index in arr) {
-    if(arr[index] === item) {
+  for (index in arr) {
+    if (!_equals(arr[index], item)) {
       return false;
     }
   }
@@ -176,10 +204,10 @@ range = function(start, end, step) {
   _assert(!(start < end && step < 0), "Invalid range (infinite loop)");
   _assert(!(end < start && 0 < step), "Invalid range (infinite loop)");
   var ret = [];
-  if(0 < step) {
-    for(ret.push(start); ret[ret.length - 1] + step < end; ret.push(ret[ret.length - 1] + step));
+  if (0 < step) {
+    for (ret.push(start); ret[ret.length - 1] + step < end; ret.push(ret[ret.length - 1] + step));
   } else {
-    for(ret.push(start); ret[ret.length - 1] + step > end; ret.push(ret[ret.length - 1] + step));
+    for (ret.push(start); ret[ret.length - 1] + step > end; ret.push(ret[ret.length - 1] + step));
   }
   return ret;
 }
@@ -212,8 +240,8 @@ reduceRight = function(arr, func) {
  */
 reverse = function(arr) {
   var half = arr.length >> 1;
-  for(index in arr) {
-    if(index < half) {
+  for (index in arr) {
+    if (index < half) {
       arr[arr.length - index - 1] ^= arr[index];
       arr[index] ^= arr[arr.length - index - 1];
       arr[arr.length - index - 1] ^= arr[index];
@@ -229,8 +257,8 @@ reverse = function(arr) {
  * @return true if the array contains item, else false
  */
 some = function(arr, item) {
-  for(index in arr) {
-    if(arr[index] === item) {
+  for (index in arr) {
+    if (_equals(arr[index],item)) {
       return true;
     }
   }
