@@ -8,13 +8,13 @@
  * @param the message to display (optional)
  */
 _assert = function(condition, message) {
-    if (!condition) {
-        var message = message || "Assertion failed";
-        if (typeof Error !== "undefined") {
-            throw new Error(message);
-        }
-        throw message; // Fallback
+  if (!condition) {
+    var message = message || "Assertion failed";
+    if (typeof Error !== "undefined") {
+      throw new Error(message);
     }
+    throw message; // Fallback
+  }
 }
 
 /**
@@ -23,9 +23,9 @@ _assert = function(condition, message) {
  * @return average of the values
  */
 average = function(arr) {
-    return reduce(arr, function(a, b) {
-        return a + b;
-    }, 0) / arr.length;
+  return reduce(arr, function(a, b) {
+    return a + b;
+  }, 0) / arr.length;
 }
 
 /**
@@ -34,12 +34,12 @@ average = function(arr) {
  * @return true if all items in arr are item, else false
  */
 every = function(arr, item) {
-    for(index in arr) {
-        if(arr[index] !== item) {
-            return false;
-        }
+  for(index in arr) {
+    if(arr[index] !== item) {
+      return false;
     }
-    return true;
+  }
+  return true;
 }
 
 /**
@@ -49,45 +49,45 @@ every = function(arr, item) {
  * @return a filtered array
  */
 filter = function(arr, pred) {
-    var ret = [];
-    for(index in arr) {
-        if(pred(arr[index])) {
-            ret.push(arr[index]);
-        }
+  var ret = [];
+  for(index in arr) {
+    if(pred(arr[index])) {
+      ret.push(arr[index]);
     }
-    return ret;
+  }
+  return ret;
 }
 
 /**
  * fold - aggregates all elements of an array based on a function, starting
- *        with some initial value
+ *    with some initial value
  * @param arr the array
  * @param func the function
  * @param init the initial value
  * @return the aggregation of all elements
  */
 fold = function(arr, func, init) {
-    var ret = init;
-    for(index in arr) {
-        ret = func(ret, arr[index]);
-    }
-    return ret;
+  var ret = init;
+  for(index in arr) {
+    ret = func(ret, arr[index]);
+  }
+  return ret;
 }
 
 /**
  * foldRight - aggregates all elements of an array, starting at the last
- *             index with an initial value, based on a function
+ *       index with an initial value, based on a function
  * @param arr the array
  * @param func the function
  * @param init the initial value
  * @return the aggregation of all elements
  */
 foldRight = function(arr, func, init) {
-    var ret = init;
-    for(index in arr) {
-        ret = func(ret, arr[arr.length - index - 1]);
-    }
-    return ret;
+  var ret = init;
+  for(index in arr) {
+    ret = func(ret, arr[arr.length - index - 1]);
+  }
+  return ret;
 }
 
 /**
@@ -96,9 +96,9 @@ foldRight = function(arr, func, init) {
  * @param func the function to run
  */
 forEach = function(arr, func) {
-    for(index in arr) {
-        func(arr[index]);
-    }
+  for(index in arr) {
+    func(arr[index]);
+  }
 }
 
 /**
@@ -110,11 +110,11 @@ forEach = function(arr, func) {
 groupBy = function(arr, grouping) {
   var ret = [];
   for(index in arr) {
-    group = grouping(arr[index]);
-    if(!ret[group]) {
-      ret[group] = [];
-    }
-    ret[group].push(arr[index]);
+  group = grouping(arr[index]);
+  if(!ret[group]) {
+    ret[group] = [];
+  }
+  ret[group].push(arr[index]);
   }
   return ret;
 }
@@ -126,11 +126,11 @@ groupBy = function(arr, grouping) {
  * @return an array containing the mapping
  */
 map = function(arr, func) {
-    var ret = [];
-    for(index in arr) {
-        ret.push(func(arr[index]));
-    }
-    return ret;
+  var ret = [];
+  for(index in arr) {
+    ret.push(func(arr[index]));
+  }
+  return ret;
 }
 
 /**
@@ -140,12 +140,12 @@ map = function(arr, func) {
  * @return true if none of the elements match, else false
  */
 none = function(arr, item) {
-    for(index in arr) {
-        if(arr[index] === item) {
-            return false;
-        }
+  for(index in arr) {
+    if(arr[index] === item) {
+      return false;
     }
-    return true;
+  }
+  return true;
 }
 
 /**
@@ -156,12 +156,12 @@ none = function(arr, item) {
  * @return the product of all values between start and end
  */
 product = function(start, end, func) {
-    var func = func || function(x) {
-        return x;
-    };
-    return fold(map(range(start, end + 1), func), function(a, b) {
-        return a * b;
-    }, 1);
+  var func = func || function(x) {
+    return x;
+  };
+  return fold(map(range(start, end + 1), func), function(a, b) {
+    return a * b;
+  }, 1);
 }
 
 /**
@@ -171,17 +171,17 @@ product = function(start, end, func) {
  * @return an array of numbers between start and end, exclusive
  */
 range = function(start, end, step) {
-    _assert(!(step === 0), "Cannot take a step");
-    var step = step || 1;
-    _assert(!(start < end && step < 0), "Invalid range (infinite loop)");
-    _assert(!(end < start && 0 < step), "Invalid range (infinite loop)");
-    var ret = [];
-    if(0 < step) {
-        for(ret.push(start); ret[ret.length - 1] + step < end; ret.push(ret[ret.length - 1] + step));
-    } else {
-        for(ret.push(start); ret[ret.length - 1] + step > end; ret.push(ret[ret.length - 1] + step));
-    }
-    return ret;
+  _assert(!(step === 0), "Cannot take a step");
+  var step = step || 1;
+  _assert(!(start < end && step < 0), "Invalid range (infinite loop)");
+  _assert(!(end < start && 0 < step), "Invalid range (infinite loop)");
+  var ret = [];
+  if(0 < step) {
+    for(ret.push(start); ret[ret.length - 1] + step < end; ret.push(ret[ret.length - 1] + step));
+  } else {
+    for(ret.push(start); ret[ret.length - 1] + step > end; ret.push(ret[ret.length - 1] + step));
+  }
+  return ret;
 }
 
 /**
@@ -191,18 +191,18 @@ range = function(start, end, step) {
  * @return the aggregation of all elements
  */
 reduce = function(arr, func) {
-    return fold(arr, func, 0);
+  return fold(arr, func, 0);
 }
 
 /**
  * reduceRight - aggregates all elements of an array, starting at the last
- *               index, based on a function
+ *         index, based on a function
  * @param arr the array
  * @param func the function
  * @return the aggregation of all elements
  */
 reduceRight = function(arr, func) {
-    return foldRight(arr, func, 0);
+  return foldRight(arr, func, 0);
 }
 
 /**
@@ -211,15 +211,15 @@ reduceRight = function(arr, func) {
  * @return the reversed array
  */
 reverse = function(arr) {
-    var half = arr.length >> 1;
-    for(index in arr) {
-        if(index < half) {
-            arr[arr.length - index - 1] ^= arr[index];
-            arr[index] ^= arr[arr.length - index - 1];
-            arr[arr.length - index - 1] ^= arr[index];
-        }
+  var half = arr.length >> 1;
+  for(index in arr) {
+    if(index < half) {
+      arr[arr.length - index - 1] ^= arr[index];
+      arr[index] ^= arr[arr.length - index - 1];
+      arr[arr.length - index - 1] ^= arr[index];
     }
-    return arr;
+  }
+  return arr;
 }
 
 /**
@@ -229,12 +229,12 @@ reverse = function(arr) {
  * @return true if the array contains item, else false
  */
 some = function(arr, item) {
-    for(index in arr) {
-        if(arr[index] == item) {
-            return true;
-        }
+  for(index in arr) {
+    if(arr[index] == item) {
+      return true;
     }
-    return false;
+  }
+  return false;
 }
 
 /**
@@ -245,10 +245,10 @@ some = function(arr, item) {
  * @return the summation of all values between start and end
  */
 sum = function(start, end, func) {
-    var func = func || function(x) {
-        return x;
-    };
-    return reduce(map(range(start, end + 1), func), function(a, b) {
-        return a + b;
-    });
+  var func = func || function(x) {
+    return x;
+  };
+  return reduce(map(range(start, end + 1), func), function(a, b) {
+    return a + b;
+  });
 }
