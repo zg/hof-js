@@ -156,7 +156,7 @@ none = function(arr, item) {
  * @return the product of all values between start and end
  */
 product = function(start, end, func) {
-    func = func || function(x) {
+    var func = func || function(x) {
         return x;
     };
     return fold(map(range(start, end + 1), func), function(a, b) {
@@ -245,7 +245,7 @@ some = function(arr, item) {
  * @return the summation of all values between start and end
  */
 sum = function(start, end, func) {
-    func = func || function(x) {
+    var func = func || function(x) {
         return x;
     };
     return reduce(map(range(start, end + 1), func), function(a, b) {
